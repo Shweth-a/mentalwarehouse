@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Mental Warehouse</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="theme-color" content="#fff">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="brand">The Mental Warehouse</h1>
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="journal.html">Journal</a>
+        <a href="rules.html">Rules</a>
+        <a href="misc.html">Notes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="dashboard">
+      <h2>Dashboard</h2>
+
+      <div class="cards-grid">
+        <a class="card" href="movies.html" id="card-movies">
+          <div class="card-title">Movies Log</div>
+          <div class="card-preview"><span class="badge" id="movies-count">0</span> movies</div>
+        </a>
+
+        <a class="card" href="journal.html" id="card-journal">
+          <div class="card-title">Journal</div>
+          <div class="card-preview"><span class="badge" id="journal-count">0</span> entries</div>
+        </a>
+
+        <a class="card" href="rules.html" id="card-rules">
+          <div class="card-title">Rules</div>
+          <div class="card-preview"><span class="badge" id="rules-count">0</span> rules</div>
+        </a>
+
+        <a class="card" href="misc.html" id="card-misc">
+          <div class="card-title">Notes</div>
+          <div class="card-preview"><span class="badge" id="misc-count">0</span> notes</div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> The Mental Warehouse — a tiny creative operations hub.</small>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const movies = storage.get('movies') || [];
+      const journal = storage.get('journal') || [];
+      const rules = storage.get('rules') || [];
+      const misc = storage.get('misc') || [];
+      document.getElementById('movies-count').textContent = movies.length;
+      document.getElementById('journal-count').textContent = journal.length;
+      document.getElementById('rules-count').textContent = rules.length;
+      document.getElementById('misc-count').textContent = misc.length;
+    });
+  </script>
+</body>
+</html>

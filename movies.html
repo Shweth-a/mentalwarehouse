@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Movies — The Mental Warehouse</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="brand">The Mental Warehouse</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="movies.html" class="active">Movies</a>
+        <a href="journal.html">Journal</a>
+        <a href="rules.html">Rules</a>
+        <a href="misc.html">Notes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="controls">
+      <button class="btn" id="add-movie">+ Add Movie</button>
+      <!-- Legend for ratings -->
+      <div style="margin-left:12px;display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="width:12px;height:12px;background:var(--palette-2);border-radius:4px;display:inline-block"></span>
+          <small>Shwetha</small>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="width:12px;height:12px;background:var(--palette-3);border-radius:4px;display:inline-block"></span>
+          <small>Sarvesh</small>
+        </div>
+      </div>
+    </div>
+
+    <div id="movies-list" class="list"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> The Mental Warehouse.</small>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" class="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3 id="modal-title">Add movie</h3>
+      <div class="form-row">
+        <input id="m-title" placeholder="Title" />
+        <input id="m-date" type="date" />
+      </div>
+      <div class="form-row">
+        <input id="m-rating" type="number" min="1" max="10" placeholder="Rating (1-10)" />
+        <input id="m-location" placeholder="Location" />
+      </div>
+      <div class="form-row">
+        <textarea id="m-notes" rows="3" placeholder="Notes (quick)" ></textarea>
+      </div>
+      <div class="row">
+        <button class="btn" id="save-m">Save</button>
+        <button class="btn secondary" id="cancel-m">Cancel</button>
+        <button class="btn" id="delete-m" style="background:var(--palette-5);color:var(--text-on-accent);display:none;margin-left:auto">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/movies.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>

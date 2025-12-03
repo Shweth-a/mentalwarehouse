@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rules — The Mental Warehouse</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="brand">The Mental Warehouse</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="journal.html">Journal</a>
+        <a href="rules.html" class="active">Rules</a>
+        <a href="misc.html">Notes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="controls">
+      <button class="btn" id="add-rule">+ Add Rule</button>
+    </div>
+
+    <div id="rules-list" class="list"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> The Mental Warehouse.</small>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" class="modal-backdrop">
+    <div class="modal">
+      <h3 id="modal-title">Add rule</h3>
+      <div class="form-row">
+        <input id="r-text" placeholder="Write a simple rule" />
+      </div>
+      <div class="row">
+        <button class="btn" id="save-r">Save</button>
+        <button class="btn secondary" id="cancel-r">Cancel</button>
+        <button class="btn" id="delete-r" style="background:var(--palette-5);color:var(--text-on-accent);display:none;margin-left:auto">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/rules.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>
