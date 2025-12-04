@@ -46,14 +46,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   function load(){
-    const movies = storage.get('movies') || [];
-    movies.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
-    listEl.innerHTML='';
-    if(movies.length===0){
-      listEl.innerHTML = '<div class="muted-note">No movies yet — add one.</div>';
-      return;
-    }
-    movies.forEach(m=>{
+    try{
+      const movies = storage.get('movies') || [];
+      movies.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+      listEl.innerHTML='';
+      if(movies.length===0){
+        listEl.innerHTML = '<div class="muted-note">No movies yet — add one.</div>';
+        return;
+      }
+      movies.forEach(m=>{
       const div = document.createElement('div');
       div.className='entry-card';
       div.innerHTML = `
@@ -91,7 +92,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
         </div>
       `;
       listEl.appendChild(div);
-    });
+      });
+    }catch(err){
+      console.error('movies.load failed', err);
+      listEl.innerHTML = '<div class="muted-note">Unable to load movies (see console).</div>';
+    }
   }
 
   function save(){

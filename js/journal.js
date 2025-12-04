@@ -33,27 +33,32 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function closeModal(){ modalBack.style.display='none'; modalBack.querySelector('.modal').classList.remove('show') }
 
   function load(){
-    let items = storage.get('journal');
-    if(!Array.isArray(items)) items = [];
-    try{ items.sort((a,b)=> (b.date||'').localeCompare(a.date||'')); }catch(e){ console.warn('journal.load sort failed', e) }
-    listEl.innerHTML='';
-    if(items.length===0){ listEl.innerHTML='<div class="muted-note">No entries yet.</div>'; return }
-    items.forEach(it=>{
-      const el = document.createElement('div'); el.className='entry-card';
-      const imgHtml = it.photo ? `<img src="${it.photo}" class="thumb"/>` : '';
-      el.innerHTML = `
-        ${imgHtml}
-        <div style="flex:1">
-          <div class="entry-meta">${it.date||''}</div>
-          <div class="entry-text">${escapeHtml(it.text||'')}</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <button class="btn edit" data-id="${it.id}">Edit</button>
-          <button class="btn delete" data-id="${it.id}">Delete</button>
-        </div>
-      `;
-      listEl.appendChild(el);
-    });
+    try{
+      let items = storage.get('journal');
+      if(!Array.isArray(items)) items = [];
+      try{ items.sort((a,b)=> (b.date||'').localeCompare(a.date||'')); }catch(e){ console.warn('journal.load sort failed', e) }
+      listEl.innerHTML='';
+      if(items.length===0){ listEl.innerHTML='<div class="muted-note">No entries yet.</div>'; return }
+      items.forEach(it=>{
+        const el = document.createElement('div'); el.className='entry-card';
+        const imgHtml = it.photo ? `<img src="${it.photo}" class="thumb"/>` : '';
+        el.innerHTML = `
+          ${imgHtml}
+          <div style="flex:1">
+            <div class="entry-meta">${it.date||''}</div>
+            <div class="entry-text">${escapeHtml(it.text||'')}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn edit" data-id="${it.id}">Edit</button>
+            <button class="btn delete" data-id="${it.id}">Delete</button>
+          </div>
+        `;
+        listEl.appendChild(el);
+      });
+    }catch(err){
+      console.error('journal.load failed', err);
+      listEl.innerHTML = '<div class="muted-note">Unable to load journal (see console).</div>';
+    }
   }
 
   function save(){
