@@ -56,41 +56,17 @@
   </footer>
 
   <script src="js/storage.js"></script>
+  <script src="js/init.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     document.addEventListener('DOMContentLoaded', ()=>{
-      // ensure seeded data exists so dashboard counts are accurate on first open
-      let movies = storage.get('movies');
-      if(!Array.isArray(movies) || movies.length===0){
-        const seed = [
-          { id: storage.id(), title: 'Twilight: New Moon', date: '2025-08-21', location: 'Shwetha', rating_shwetha: '6.0', rating_sarvesh: '5.0', notes: '' },
-          { id: storage.id(), title: 'The Proposal', date: '2025-xx-xx', location: 'Sarvesh', rating_shwetha: '', rating_sarvesh: '', notes: '' },
-          { id: storage.id(), title: 'F1: The Movie', date: '2025-09-08', location: 'Sarvesh', rating_shwetha: '9.2', rating_sarvesh: '7.4', notes: '' },
-          { id: storage.id(), title: 'How to Train Your Dragon 2', date: '2025-09-09', location: 'Shwetha', rating_shwetha: '8.1', rating_sarvesh: '7', notes: '' },
-          { id: storage.id(), title: "Harry Potter and the Philosopher's Stone", date: '2025-xx-xx', location: 'xxxxxxx', rating_shwetha: '9', rating_sarvesh: '6.3', notes: '' }
-        ];
-        storage.set('movies', seed);
-        movies = seed;
-      }
-
-      let rules = storage.get('rules');
-      if(!Array.isArray(rules) || rules.length===0){
-        const defaults = [
-          { id: storage.id(), text: 'no take backs' },
-          { id: storage.id(), text: 'the older person is always right' },
-          { id: storage.id(), text: "no modifying my (shwetha's) rules" },
-          { id: storage.id(), text: 'only 1 use of each excuse is allowed per conversation' }
-        ];
-        storage.set('rules', defaults);
-        rules = defaults;
-      }
-
+      const movies = storage.get('movies') || [];
       const journal = storage.get('journal') || [];
+      const rules = storage.get('rules') || [];
       const misc = storage.get('misc') || [];
-
-      document.getElementById('movies-count').textContent = (movies || []).length;
+      document.getElementById('movies-count').textContent = movies.length;
       document.getElementById('journal-count').textContent = journal.length;
-      document.getElementById('rules-count').textContent = (rules || []).length;
+      document.getElementById('rules-count').textContent = rules.length;
       document.getElementById('misc-count').textContent = misc.length;
     });
   </script>

@@ -146,23 +146,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       if(found) openModal(found);
     }
   });
-  // Seed default movies if none exist
-  (function seedIfEmpty(){
-    const existing = storage.get('movies');
-    if(!existing || existing.length===0){
-      const seed = [
-        { id: storage.id(), title: 'Twilight: New Moon', date: '2025-08-21', location: 'Shwetha', rating_shwetha: '6.0', rating_sarvesh: '5.0', notes: '' },
-        { id: storage.id(), title: 'The Proposal', date: '2025-xx-xx', location: 'Sarvesh', rating_shwetha: '', rating_sarvesh: '', notes: '' },
-        { id: storage.id(), title: 'F1: The Movie', date: '2025-09-08', location: 'Sarvesh', rating_shwetha: '9.2', rating_sarvesh: '7.4', notes: '' },
-        { id: storage.id(), title: 'How to Train Your Dragon 2', date: '2025-09-09', location: 'Shwetha', rating_shwetha: '8.1', rating_sarvesh: '7', notes: '' },
-        { id: storage.id(), title: "Harry Potter and the Philosopher's Stone", date: '2025-xx-xx', location: 'xxxxxxx', rating_shwetha: '9', rating_sarvesh: '6.3', notes: '' },
-        { id: storage.id(), title: 'Harry Potter and the Chamber of Secrets', date: '2025-xx-xx', location: 'xxxxxxx', rating_shwetha: '', rating_sarvesh: '', notes: '' },
-        { id: storage.id(), title: 'Harry Potter and the Prisoner of Azkaban', date: '2025-xx-xx', location: 'xxxxxxx', rating_shwetha: '', rating_sarvesh: '', notes: '' },
-        { id: storage.id(), title: 'Harry Potter and the Goblet of Fire', date: '2025-xx-xx', location: 'xxxxxxx', rating_shwetha: '', rating_sarvesh: '', notes: '' }
-      ];
-      storage.set('movies', seed);
-    }
-  })();
+  // seeding handled by js/init.js
 
   load();
 });

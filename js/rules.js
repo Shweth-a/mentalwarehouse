@@ -74,19 +74,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
 
-  // Seed default rules if none exist
-  (function seedRules(){
-    const existing = storage.get('rules');
-    if(!existing || existing.length===0){
-      const defaults = [
-        { id: storage.id(), text: 'no take backs' },
-        { id: storage.id(), text: 'the older person is always right' },
-        { id: storage.id(), text: "no modifying my (shwetha's) rules" },
-        { id: storage.id(), text: 'only 1 use of each excuse is allowed per conversation' }
-      ];
-      storage.set('rules', defaults);
-    }
-  })();
+  // seeding handled by js/init.js
 
   load();
 });
