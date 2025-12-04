@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Games — The Mental Warehouse</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .games {display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .panel {background:var(--card-primary);padding:16px;border-radius:12px}
+    .board{display:grid;grid-template-columns:repeat(3,72px);gap:8px}
+    .cell{width:72px;height:72px;display:flex;align-items:center;justify-content:center;font-size:22px;border-radius:8px;background:var(--palette-5);cursor:pointer}
+    .controls .small{font-size:13px}
+    .status{margin-bottom:10px}
+    .rps-buttons{display:flex;gap:8px}
+    .textarea-sig{width:100%;height:80px}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="brand">The Mental Warehouse</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="journal.html">Journal</a>
+        <a href="rules.html">Rules</a>
+        <a href="misc.html">Notes</a>
+        <a href="games.html" class="active">Games</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Two-player mini games</h2>
+    <div class="games">
+      <div>
+        <div class="panel">
+          <div class="status" id="conn-status">Not connected</div>
+          <div class="controls">
+            <button class="btn" id="create-offer">Create offer (share)</button>
+            <button class="btn secondary" id="accept-offer">Accept remote offer</button>
+          </div>
+          <p class="small muted-note">Remote mode uses WebRTC DataChannel; copy the offer text to your friend and paste their answer back into the box when asked.</p>
+          <textarea id="sig-box" class="textarea-sig" placeholder="Offer / Answer" ></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" id="apply-sig">Apply</button>
+            <button class="btn secondary" id="reset-conn">Reset</button>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="panel">
+          <h3>Tic‑Tac‑Toe</h3>
+          <div id="ttt-status" class="muted-note small">Choose local or remote mode.</div>
+          <div class="board" id="ttt-board"></div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="btn" id="ttt-local">Local (pass & play)</button>
+            <button class="btn secondary" id="ttt-reset">Reset board</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel">
+          <h3>Rock‑Paper‑Scissors</h3>
+          <div id="rps-status" class="muted-note small">Play locally or challenge remotely.</div>
+          <div class="rps-buttons" style="margin-top:8px">
+            <button class="btn" data-choice="rock">Rock</button>
+            <button class="btn" data-choice="paper">Paper</button>
+            <button class="btn" data-choice="scissors">Scissors</button>
+          </div>
+          <div id="rps-result" style="margin-top:12px"></div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="panel">
+          <h4>Connection log</h4>
+          <div id="log" style="max-height:220px;overflow:auto;font-size:13px;color:var(--muted)"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> The Mental Warehouse.</small>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/webrtc.js"></script>
+  <script src="js/games.js"></script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>
