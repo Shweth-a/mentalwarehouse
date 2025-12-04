@@ -84,8 +84,21 @@ body{
 .entry-card .muted-note{font-size:12px}
 
 /* Journal-specific: larger image and handwritten font for notes */
-.page-journal .thumb{width:160px;height:120px}
-.page-journal .entry-text{font-family: 'Patrick Hand', cursive; font-size:18px; line-height:1.45}
+.page-journal .thumb{width:100%;height:auto;border-radius:8px;display:block}
+.page-journal .entry-text{font-family: 'Patrick Hand', cursive; font-size:18px; line-height:1.45;margin-top:8px}
+
+/* Layout: make journal entries narrower (under half page) and flow in two columns */
+.page-journal .list{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.page-journal .entry-card{width:calc(50% - 12px);box-sizing:border-box;position:relative;display:flex;flex-direction:column;align-self:flex-start}
+@media (max-width:760px){
+  .page-journal .entry-card{width:100%}
+}
+
+/* control stack in top-right of each card */
+.page-journal .control-stack{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(11,18,32,0.06);background:var(--bg);cursor:pointer}
+.icon-btn:focus{outline:2px solid rgba(0,0,0,0.06)}
+.page-journal .btn.small{padding:6px 8px;font-size:13px}
 
 /* Meta inline (date / location) */
 .meta-inline{display:flex;gap:12px;align-items:center}

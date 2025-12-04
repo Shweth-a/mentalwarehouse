@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const fields = {
     date: document.getElementById('j-date'),
     photo: document.getElementById('j-photo'),
+    location: document.getElementById('j-location'),
     text: document.getElementById('j-text')
   };
 
@@ -19,11 +20,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(edit){
       document.getElementById('modal-title').textContent='Edit entry';
       fields.date.value = edit.date || '';
+      fields.location.value = edit.location || edit.who || '';
       fields.text.value = edit.text || '';
       editingId = edit.id;
     }else{
       document.getElementById('modal-title').textContent='Add journal entry';
       fields.date.value = new Date().toISOString().slice(0,10);
+      fields.location.value = '';
       fields.text.value = '';
       // clear file input correctly
       try{ fields.photo.value = '' }catch(e){}
@@ -41,18 +44,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
       if(items.length===0){ listEl.innerHTML='<div class="muted-note">No entries yet.</div>'; return }
       items.forEach(it=>{
         const el = document.createElement('div'); el.className='entry-card';
-        const imgHtml = it.photo ? `<img src="${it.photo}" class="thumb"/>` : '';
-        el.innerHTML = `
-          ${imgHtml}
-          <div style="flex:1">
-            <div class="entry-meta">${it.date||''}</div>
-            <div class="entry-text">${escapeHtml(it.text||'')}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <button class="btn edit" data-id="${it.id}">Edit</button>
-            <button class="btn delete" data-id="${it.id}">Delete</button>
-          </div>
-        `;
+          const photoHtml = it.photo ? `<a href="${it.photo}" target="_blank" rel="noopener"><img class="thumb" src="${it.photo}"></a>` : '';
+          el.innerHTML = `
+            <div class="control-stack">
+              <button class="icon-btn edit" data-id="${it.id}" title="Edit">⋯</button>
+              <button class="icon-btn btn small delete" data-id="${it.id}" title="Delete">🗑</button>
+            </div>
+            <div class="media">
+              ${photoHtml}
+            </div>
+            <div class="body">
+              <div class="meta-sub">${it.date || ''} • ${escapeHtml(it.location || '')}</div>
+              <p class="entry-text">${escapeHtml(it.text || '')}</p>
+            </div>
+          `;
         listEl.appendChild(el);
       });
     }catch(err){
@@ -61,39 +66,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 
-  // --- Export / Import helpers (to migrate localStorage between origins)
-  const exportBtn = document.getElementById('export-data');
-  const importBtn = document.getElementById('import-data');
-  const dataWrap = document.getElementById('data-box-wrap');
-  const dataBox = document.getElementById('data-box');
-  const applyImport = document.getElementById('apply-import');
-  const closeImport = document.getElementById('close-import');
-
-  function showImport(show){ if(!dataWrap) return; dataWrap.style.display = show ? 'block' : 'none' }
-
-  exportBtn && exportBtn.addEventListener('click', async ()=>{
-    try{
-      const dump = storage.exportAll ? storage.exportAll() : null;
-      const txt = JSON.stringify(dump, null, 2);
-      // try clipboard
-      if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(txt); alert('Export copied to clipboard — you can paste this into remote site using Import Data.'); }
-      // also show in the data box
-      if(dataBox){ dataBox.value = txt; showImport(true) }
-    }catch(e){ console.error('export failed', e); alert('Export failed — see console') }
-  });
-
-  importBtn && importBtn.addEventListener('click', ()=> showImport(true));
-  closeImport && closeImport.addEventListener('click', ()=> showImport(false));
-  applyImport && applyImport.addEventListener('click', ()=>{
-    try{
-      const val = dataBox && dataBox.value && dataBox.value.trim(); if(!val) return alert('Paste JSON to import');
-      const obj = JSON.parse(val);
-      if(storage.importAll && storage.importAll(obj)){
-        alert('Import applied — reloading page to show data');
-        window.location.reload();
-      }else alert('Import failed');
-    }catch(e){ console.error('import failed', e); alert('Import JSON invalid — see console') }
-  });
+  // export/import removed per user request
 
   function save(){
     let items = storage.get('journal');
