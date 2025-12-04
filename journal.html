@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Journal — The Mental Warehouse</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="page-journal">
   <header class="topbar">
     <div class="container">
       <h1 class="brand">The Mental Warehouse</h1>
@@ -23,6 +24,16 @@
   <main class="container">
     <div class="controls">
       <button class="btn" id="add-entry">+ Add Entry</button>
+      <button class="btn secondary" id="export-data">Export Data</button>
+      <button class="btn" id="import-data">Import Data</button>
+    </div>
+
+    <div id="data-box-wrap" style="display:none;margin-top:12px">
+      <textarea id="data-box" style="width:100%;height:120px" placeholder='Paste exported JSON here and click Apply import'></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn" id="apply-import">Apply import</button>
+        <button class="btn secondary" id="close-import">Close</button>
+      </div>
     </div>
 
     <div id="journal-list" class="list"></div>

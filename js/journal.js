@@ -61,6 +61,40 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 
+  // --- Export / Import helpers (to migrate localStorage between origins)
+  const exportBtn = document.getElementById('export-data');
+  const importBtn = document.getElementById('import-data');
+  const dataWrap = document.getElementById('data-box-wrap');
+  const dataBox = document.getElementById('data-box');
+  const applyImport = document.getElementById('apply-import');
+  const closeImport = document.getElementById('close-import');
+
+  function showImport(show){ if(!dataWrap) return; dataWrap.style.display = show ? 'block' : 'none' }
+
+  exportBtn && exportBtn.addEventListener('click', async ()=>{
+    try{
+      const dump = storage.exportAll ? storage.exportAll() : null;
+      const txt = JSON.stringify(dump, null, 2);
+      // try clipboard
+      if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(txt); alert('Export copied to clipboard — you can paste this into remote site using Import Data.'); }
+      // also show in the data box
+      if(dataBox){ dataBox.value = txt; showImport(true) }
+    }catch(e){ console.error('export failed', e); alert('Export failed — see console') }
+  });
+
+  importBtn && importBtn.addEventListener('click', ()=> showImport(true));
+  closeImport && closeImport.addEventListener('click', ()=> showImport(false));
+  applyImport && applyImport.addEventListener('click', ()=>{
+    try{
+      const val = dataBox && dataBox.value && dataBox.value.trim(); if(!val) return alert('Paste JSON to import');
+      const obj = JSON.parse(val);
+      if(storage.importAll && storage.importAll(obj)){
+        alert('Import applied — reloading page to show data');
+        window.location.reload();
+      }else alert('Import failed');
+    }catch(e){ console.error('import failed', e); alert('Import JSON invalid — see console') }
+  });
+
   function save(){
     let items = storage.get('journal');
     if(!Array.isArray(items)) items = [];

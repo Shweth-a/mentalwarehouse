@@ -14,5 +14,22 @@ const storage = (function(){
   }
   function clear(key){ localStorage.removeItem(prefix+key) }
   function id(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6) }
-  return { get, set, clear, id }
+  // export/import helpers
+  function exportAll(){
+    try{
+      const keys = ['movies','journal','rules','misc'];
+      const out = {};
+      keys.forEach(k=>{ const v = get(k); if(v!=null) out[k]=v });
+      return out;
+    }catch(e){ console.error('exportAll',e); return null }
+  }
+  function importAll(obj){
+    try{
+      if(!obj || typeof obj !== 'object') return false;
+      Object.keys(obj).forEach(k=> set(k, obj[k]) );
+      return true;
+    }catch(e){ console.error('importAll',e); return false }
+  }
+
+  return { get, set, clear, id, exportAll, importAll }
 })();

@@ -83,6 +83,10 @@ body{
 .entry-card .rating-row .rating-badge{font-size:13px;padding:6px 8px}
 .entry-card .muted-note{font-size:12px}
 
+/* Journal-specific: larger image and handwritten font for notes */
+.page-journal .thumb{width:160px;height:120px}
+.page-journal .entry-text{font-family: 'Patrick Hand', cursive; font-size:18px; line-height:1.45}
+
 /* Meta inline (date / location) */
 .meta-inline{display:flex;gap:12px;align-items:center}
 .meta-inline .meta-item svg{width:16px;height:16px;opacity:0.9}
