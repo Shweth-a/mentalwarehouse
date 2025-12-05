@@ -18,51 +18,38 @@ A personal creative operations hub for tracking movies, journal entries, rules, 
 npm install
 ```
 
-### Migrate Existing Data (First Time Only)
+## Modes
 
-If you have data in localStorage from the previous version:
+- **GitHub Pages (static, read-only):** The site fetches data from `data/*.json`. Adding/editing via the UI will be ignored because static hosting cannot write files. Update data by editing the JSON files and `git push`.
+- **Local dev (read/write):** Run the dev server to read/write JSON files in `data/`.
 
-1. Open `migrate.html` in your browser
-2. Click "Extract localStorage Data"
-3. Copy each JSON block and save to the corresponding file in `data/`
-4. Or manually copy the JSON to each file:
-   - `data/movies.json`
-   - `data/journal.json`
-   - `data/rules.json`
-   - `data/misc.json`
-
-### Start the Server
+### Local Dev (read/write)
 
 ```bash
+npm install
 npm start
 ```
 
-The app will be available at `http://localhost:3000`
+Open `http://localhost:3000`. Adds/edits/deletes persist to `data/*.json` via the dev API. Commit and push the updated `data/` folder to publish changes.
 
-## Data Storage
+### Static (GitHub Pages) behavior
 
-All data is now stored in JSON files in the `data/` folder:
+- Data loads from `data/*.json` in the repo.
+- Save/Delete is a no-op on GitHub Pages (read-only). To change data on the live site, edit `data/*.json` locally (or through the dev server), then `git push`.
+
+## Data Files
+
 - `data/movies.json` - Movie entries
 - `data/journal.json` - Journal entries
 - `data/rules.json` - Rules
 - `data/misc.json` - Notes
 
-Each file contains an array of objects. Data persists across sessions and can be easily backed up, versioned, or synced.
+## API (dev server)
 
-## Development
-
-The server (`server.js`) provides two API endpoints:
 - `GET /api/:collection` - Retrieve data for a collection
 - `POST /api/:collection` - Save data for a collection
 
-Static files (HTML, CSS, JS) are served from the root directory.
-
-## Deployment
-
-For production deployment:
-1. Commit the `data/` folder with your content
-2. Deploy to a Node.js hosting service (Vercel, Render, Railway, etc.)
-3. Ensure the server can write to the `data/` directory
+Static assets are served from the project root.
 
 ## License
 
