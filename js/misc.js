@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const saveBtn = document.getElementById('save-n');
   const cancelBtn = document.getElementById('cancel-n');
   const fields = { text: document.getElementById('n-text'), photo: document.getElementById('n-photo') };
+  
+  // Hide add button if not in dev mode
+  if(!window.isDev && addBtn) addBtn.style.display = 'none';
+  
   let editingId = null;
 
   function openModal(edit=null){ modalBack.style.display='flex'; modalBack.querySelector('.modal').classList.add('show');
@@ -22,10 +26,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
       card.innerHTML = `
         ${n.photo ? `<img src="${n.photo}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px"/>` : ''}
         <div class="card-title">${escapeHtml(n.text||'')}</div>
-        <div style="display:flex;gap:8px;margin-top:8px">
+        ${window.isDev ? `<div style="display:flex;gap:8px;margin-top:8px">
           <button class="btn edit" data-id="${n.id}">Edit</button>
           <button class="btn delete" data-id="${n.id}">Delete</button>
-        </div>
+        </div>` : ''}
       `;
       grid.appendChild(card);
     });

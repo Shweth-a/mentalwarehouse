@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const saveBtn = document.getElementById('save-r');
   const cancelBtn = document.getElementById('cancel-r');
   const field = document.getElementById('r-text');
+  
+  // Hide add button if not in dev mode
+  if(!window.isDev && addBtn) addBtn.style.display = 'none';
+  
   let editingId = null;
 
   function openModal(edit=null){
@@ -33,9 +37,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         <div style="flex:1">
           <div class="entry-text">${escapeHtml(r.text)}</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
+        ${window.isDev ? `<div style="display:flex;flex-direction:column;gap:8px">
           <button class="btn edit" data-id="${r.id}">Edit</button>
-        </div>
+        </div>` : ''}
       `;
       listEl.appendChild(el);
     });

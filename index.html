@@ -52,6 +52,13 @@
           <div class="card-preview"><span class="badge">—</span> two-player</div>
         </a>
       </div>
+
+      <div id="dev-controls" style="display:none; margin-top:2rem; text-align:center;">
+        <button id="save-locally-btn" style="padding:0.75rem 1.5rem; font-size:1rem; background:var(--palette-3); color:white; border:none; border-radius:0.5rem; cursor:pointer; font-weight:bold;">
+          💾 Save Locally
+        </button>
+        <p id="save-status" style="margin-top:0.5rem; font-size:0.9rem; color:var(--palette-3);"></p>
+      </div>
     </section>
   </main>
 
@@ -61,6 +68,7 @@
     </div>
   </footer>
 
+  <script src="js/data.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/init.js"></script>
   <script>
@@ -74,7 +82,25 @@
       document.getElementById('journal-count').textContent = journal.length;
       document.getElementById('rules-count').textContent = rules.length;
       document.getElementById('misc-count').textContent = misc.length;
+
+      // Show Save Locally button only in dev mode
+      if(window.isDev){
+        document.getElementById('dev-controls').style.display = 'block';
+        document.getElementById('save-locally-btn').addEventListener('click', async ()=>{
+          try{
+            document.getElementById('save-locally-btn').disabled = true;
+            document.getElementById('save-status').textContent = 'Saving...';
+            await storage.saveAll();
+            document.getElementById('save-status').textContent = '✅ Saved to disk! Changes will reflect on index.html after refresh.';
+            document.getElementById('save-locally-btn').disabled = false;
+          }catch(e){
+            document.getElementById('save-status').textContent = '❌ Save failed: ' + e.message;
+            document.getElementById('save-locally-btn').disabled = false;
+          }
+        });
+      }
     });
+  </script>
   </script>
 </body>
 </html>

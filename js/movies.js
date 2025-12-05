@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const saveBtn = document.getElementById('save-m');
   const cancelBtn = document.getElementById('cancel-m');
 
+  // Hide add button if not in dev mode
+  if(!window.isDev && addBtn) addBtn.style.display = 'none';
+
   const fields = {
     title: document.getElementById('m-title'),
     date: document.getElementById('m-date'),
@@ -86,7 +89,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             </div>
 
             <div style="margin-left:auto">
-              <button class="btn edit" data-id="${m.id}" style="background:var(--bg);border:1px solid rgba(11,18,32,0.06)">Edit</button>
+              ${window.isDev ? `<button class="btn edit" data-id="${m.id}" style="background:var(--bg);border:1px solid rgba(11,18,32,0.06)">Edit</button>` : ''}
             </div>
           </div>
 

@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const saveBtn = document.getElementById('save-j');
   const cancelBtn = document.getElementById('cancel-j');
 
+  // Hide add button if not in dev mode
+  if(!window.isDev && addBtn) addBtn.style.display = 'none';
+
   const fields = {
     date: document.getElementById('j-date'),
     photo: document.getElementById('j-photo'),
@@ -46,10 +49,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const el = document.createElement('div'); el.className='entry-card';
           const photoHtml = it.photo ? `<a href="${it.photo}" target="_blank" rel="noopener"><img class="thumb" src="${it.photo}"></a>` : '';
           el.innerHTML = `
-            <div class="control-stack">
+            ${window.isDev ? `<div class="control-stack">
               <button class="icon-btn edit" data-id="${it.id}" title="Edit">⋯</button>
               <button class="icon-btn btn small delete" data-id="${it.id}" title="Delete">🗑</button>
-            </div>
+            </div>` : ''}
             <div class="media">
               ${photoHtml}
             </div>
