@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }else{
       rules.push({ id: storage.id(), ...payload });
     }
-    await storage.set('rules', rules); closeModal(); load();
+    await storage.set('rules', rules); closeModal(); await load();
   }
 
   listEl.addEventListener('click', async (e)=>{
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const rules = await storage.get('rules') || [];
     await storage.set('rules', rules.filter(r=>r.id!==editingId));
     editingId = null;
-    closeModal(); load();
+    closeModal(); await load();
   });
   modalBack.addEventListener('click', (e)=>{ if(e.target===modalBack) closeModal() });
 

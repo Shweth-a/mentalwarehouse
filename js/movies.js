@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const fields = {
     title: document.getElementById('m-title'),
     date: document.getElementById('m-date'),
-    rating: document.getElementById('m-rating'),
+    ratingShwetha: document.getElementById('m-rating-shwetha'),
+    ratingSarvesh: document.getElementById('m-rating-sarvesh'),
     location: document.getElementById('m-location'),
     notes: document.getElementById('m-notes')
   }
@@ -23,7 +24,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       modalTitle.textContent='Edit movie'
       fields.title.value = edit.title || '';
       fields.date.value = edit.date || '';
-      fields.rating.value = edit.rating || '';
+      fields.ratingShwetha.value = edit.rating_shwetha || '';
+      fields.ratingSarvesh.value = edit.rating_sarvesh || '';
       // support legacy `who` key as well as new `location`
       fields.location.value = edit.location || edit.who || '';
       fields.notes.value = edit.notes || '';
@@ -104,9 +106,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const payload = {
       title: fields.title.value.trim(),
       date: fields.date.value || new Date().toISOString().slice(0,10),
-      rating: fields.rating.value || '',
-      rating_shwetha: fields.rating.value || '',
-      rating_sarvesh: '',
+      rating_shwetha: fields.ratingShwetha.value || '',
+      rating_sarvesh: fields.ratingSarvesh.value || '',
       location: fields.location.value || '',
       notes: fields.notes.value || ''
     };
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       movies.push({ id: storage.id(), ...payload });
     }
     await storage.set('movies', movies);
-    closeModal(); load();
+    closeModal(); await load();
   }
 
   // small helper
@@ -134,7 +135,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const filtered = movies.filter(m=>m.id!==editingId);
     await storage.set('movies', filtered);
     editingId = null;
-    closeModal(); load();
+    closeModal(); await load();
   });
   modalBack.addEventListener('click', (e)=>{ if(e.target===modalBack) closeModal() });
   listEl.addEventListener('click', async (e)=>{

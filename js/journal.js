@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(!Array.isArray(items)) items = [];
     const reader = new FileReader();
     const file = fields.photo.files && fields.photo.files[0];
-    const payload = { date: fields.date.value || new Date().toISOString().slice(0,10), text: fields.text.value || '' };
+    const payload = { 
+      date: fields.date.value || new Date().toISOString().slice(0,10), 
+      location: fields.location.value || '',
+      text: fields.text.value || '' 
+    };
     async function doSave(photoData){
       if(photoData) payload.photo = photoData;
       if(editingId){
@@ -83,7 +87,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         items.push({ id: storage.id(), ...payload });
       }
       await storage.set('journal', items);
-      closeModal(); load();
+      closeModal(); await load();
     }
     if(file){
       reader.onload = ()=> doSave(reader.result);
@@ -97,7 +101,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const id = e.target.dataset && e.target.dataset.id; if(!id) return;
     const items = await storage.get('journal') || [];
     if(e.target.classList.contains('delete')){
-      await storage.set('journal', items.filter(i=>i.id!==id)); load();
+      await storage.set('journal', items.filter(i=>i.id!==id)); await load();
     }else if(e.target.classList.contains('edit')){
       const found = items.find(i=>i.id===id); if(found) openModal(found);
     }
