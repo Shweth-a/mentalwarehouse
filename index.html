@@ -65,11 +65,11 @@
   <script src="js/init.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const movies = storage.get('movies') || [];
-      const journal = storage.get('journal') || [];
-      const rules = storage.get('rules') || [];
-      const misc = storage.get('misc') || [];
+    document.addEventListener('DOMContentLoaded', async ()=>{
+      const movies = await storage.get('movies') || [];
+      const journal = await storage.get('journal') || [];
+      const rules = await storage.get('rules') || [];
+      const misc = await storage.get('misc') || [];
       document.getElementById('movies-count').textContent = movies.length;
       document.getElementById('journal-count').textContent = journal.length;
       document.getElementById('rules-count').textContent = rules.length;

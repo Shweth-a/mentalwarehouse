@@ -1,18 +1,40 @@
-// Simple storage helper used across pages
+// File-based storage helper using server API
 const storage = (function(){
-  const prefix = 'mentalwarehouse:';
-  function get(key){
+  const API_BASE = '/api';
+  
+  async function get(key){
     try{
-      const raw = localStorage.getItem(prefix+key);
-      return raw ? JSON.parse(raw) : null;
-    }catch(e){ console.error('storage.get parse', e); return null }
+      const response = await fetch(`${API_BASE}/${key}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    }catch(e){ 
+      console.error('storage.get error', e); 
+      return null;
+    }
   }
-  function set(key, value){
+  
+  async function set(key, value){
     try{
-      localStorage.setItem(prefix+key, JSON.stringify(value));
-    }catch(e){ console.error('storage.set', e) }
+      const response = await fetch(`${API_BASE}/${key}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(value)
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    }catch(e){ 
+      console.error('storage.set error', e);
+      throw e;
+    }
   }
-  function clear(key){ localStorage.removeItem(prefix+key) }
-  function id(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6) }
-  return { get, set, clear, id }
+  
+  async function clear(key){
+    return set(key, []);
+  }
+  
+  function id(){ 
+    return Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+  }
+  
+  return { get, set, clear, id };
 })();

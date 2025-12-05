@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
   function closeModal(){ modalBack.style.display='none'; modalBack.querySelector('.modal').classList.remove('show') }
 
-  function load(){
+  async function load(){
     try{
-      let items = storage.get('journal');
+      let items = await storage.get('journal');
       if(!Array.isArray(items)) items = [];
       try{ items.sort((a,b)=> (b.date||'').localeCompare(a.date||'')); }catch(e){ console.warn('journal.load sort failed', e) }
       listEl.innerHTML='';
@@ -68,13 +68,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   // export/import removed per user request
 
-  function save(){
-    let items = storage.get('journal');
+  async function save(){
+    let items = await storage.get('journal');
     if(!Array.isArray(items)) items = [];
     const reader = new FileReader();
     const file = fields.photo.files && fields.photo.files[0];
     const payload = { date: fields.date.value || new Date().toISOString().slice(0,10), text: fields.text.value || '' };
-    function doSave(photoData){
+    async function doSave(photoData){
       if(photoData) payload.photo = photoData;
       if(editingId){
         const idx = items.findIndex(x=>x.id===editingId);
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }else{
         items.push({ id: storage.id(), ...payload });
       }
-      storage.set('journal', items);
+      await storage.set('journal', items);
       closeModal(); load();
     }
     if(file){
@@ -93,11 +93,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 
-  listEl.addEventListener('click', (e)=>{
+  listEl.addEventListener('click', async (e)=>{
     const id = e.target.dataset && e.target.dataset.id; if(!id) return;
-    const items = storage.get('journal') || [];
+    const items = await storage.get('journal') || [];
     if(e.target.classList.contains('delete')){
-      storage.set('journal', items.filter(i=>i.id!==id)); load();
+      await storage.set('journal', items.filter(i=>i.id!==id)); load();
     }else if(e.target.classList.contains('edit')){
       const found = items.find(i=>i.id===id); if(found) openModal(found);
     }

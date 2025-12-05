@@ -15,19 +15,19 @@
     { text: 'only 1 use of each excuse is allowed per conversation' }
   ];
 
-  function ensureSeeds(){
+  async function ensureSeeds(){
     try{
       // movies
-      let movies = storage.get('movies');
+      let movies = await storage.get('movies');
       if(!Array.isArray(movies) || movies.length===0){
         const withIds = movieSeed.map(m=>({ id: storage.id(), ...m }));
-        storage.set('movies', withIds);
+        await storage.set('movies', withIds);
       }
       // rules
-      let rules = storage.get('rules');
+      let rules = await storage.get('rules');
       if(!Array.isArray(rules) || rules.length===0){
         const withIds = rulesSeed.map(r=>({ id: storage.id(), ...r }));
-        storage.set('rules', withIds);
+        await storage.set('rules', withIds);
       }
     }catch(e){ console.warn('init.ensureSeeds failed', e) }
   }

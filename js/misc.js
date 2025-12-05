@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
   function closeModal(){ modalBack.style.display='none'; modalBack.querySelector('.modal').classList.remove('show') }
 
-  function load(){
-    const notes = storage.get('misc') || [];
+  async function load(){
+    const notes = await storage.get('misc') || [];
     grid.innerHTML='';
     if(notes.length===0){ grid.innerHTML='<div class="muted-note">No notes yet.</div>'; return }
     notes.forEach(n=>{
@@ -31,16 +31,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  function save(){
-    const notes = storage.get('misc') || [];
+  async function save(){
+    const notes = await storage.get('misc') || [];
     const file = fields.photo.files && fields.photo.files[0];
     const reader = new FileReader();
     const payload = { text: fields.text.value || '' };
-    function doSave(photoData){ if(photoData) payload.photo = photoData; if(editingId){ const idx = notes.findIndex(x=>x.id===editingId); if(idx>-1) notes[idx] = {...notes[idx], ...payload } } else { notes.push({ id: storage.id(), ...payload }) } storage.set('misc', notes); closeModal(); load(); }
+    async function doSave(photoData){ if(photoData) payload.photo = photoData; if(editingId){ const idx = notes.findIndex(x=>x.id===editingId); if(idx>-1) notes[idx] = {...notes[idx], ...payload } } else { notes.push({ id: storage.id(), ...payload }) } await storage.set('misc', notes); closeModal(); load(); }
     if(file){ reader.onload = ()=> doSave(reader.result); reader.readAsDataURL(file); } else { doSave(); }
   }
 
-  grid.addEventListener('click', (e)=>{ const id = e.target.dataset && e.target.dataset.id; if(!id) return; const notes = storage.get('misc') || []; if(e.target.classList.contains('delete')){ storage.set('misc', notes.filter(n=>n.id!==id)); load(); } else if(e.target.classList.contains('edit')){ const f = notes.find(n=>n.id===id); if(f) openModal(f); } });
+  grid.addEventListener('click', async (e)=>{ const id = e.target.dataset && e.target.dataset.id; if(!id) return; const notes = await storage.get('misc') || []; if(e.target.classList.contains('delete')){ await storage.set('misc', notes.filter(n=>n.id!==id)); load(); } else if(e.target.classList.contains('edit')){ const f = notes.find(n=>n.id===id); if(f) openModal(f); } });
 
   addBtn.addEventListener('click', ()=>openModal()); cancelBtn.addEventListener('click', closeModal); saveBtn.addEventListener('click', save); modalBack.addEventListener('click', (e)=>{ if(e.target===modalBack) closeModal() });
 

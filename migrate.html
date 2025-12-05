@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migrate localStorage to Files</title>
+  <style>
+    body { font-family: system-ui; max-width: 600px; margin: 50px auto; padding: 20px; }
+    button { padding: 10px 20px; margin: 10px 0; cursor: pointer; }
+    .output { background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    pre { white-space: pre-wrap; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Migrate localStorage to Files</h1>
+  <p>This tool extracts data from localStorage and shows you the JSON to save in the data/ folder.</p>
+  
+  <button onclick="migrate()">Extract localStorage Data</button>
+  
+  <div id="output" class="output" style="display:none;">
+    <h3>Instructions:</h3>
+    <ol>
+      <li>Copy each JSON block below</li>
+      <li>Save to the corresponding file in the data/ folder</li>
+      <li>Start the server with <code>npm start</code></li>
+    </ol>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    function migrate() {
+      const prefix = 'mentalwarehouse:';
+      const keys = ['movies', 'journal', 'rules', 'misc'];
+      const results = {};
+      
+      keys.forEach(key => {
+        try {
+          const raw = localStorage.getItem(prefix + key);
+          results[key] = raw ? JSON.parse(raw) : [];
+        } catch(e) {
+          console.error(`Failed to parse ${key}:`, e);
+          results[key] = [];
+        }
+      });
+      
+      const output = document.getElementById('output');
+      const resultsDiv = document.getElementById('results');
+      
+      resultsDiv.innerHTML = '';
+      
+      keys.forEach(key => {
+        const block = document.createElement('div');
+        block.innerHTML = `
+          <h4>data/${key}.json (${results[key].length} items)</h4>
+          <pre>${JSON.stringify(results[key], null, 2)}</pre>
+          <button onclick="copyToClipboard('${key}')">Copy ${key}.json</button>
+        `;
+        resultsDiv.appendChild(block);
+      });
+      
+      window.migrationData = results;
+      output.style.display = 'block';
+    }
+    
+    function copyToClipboard(key) {
+      const text = JSON.stringify(window.migrationData[key], null, 2);
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`Copied ${key}.json to clipboard!`);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
   function closeModal(){ modalBack.style.display='none'; modalBack.querySelector('.modal').classList.remove('show') }
 
-  function load(){
-    const rules = storage.get('rules') || [];
+  async function load(){
+    const rules = await storage.get('rules') || [];
     listEl.innerHTML='';
     if(rules.length===0){ listEl.innerHTML='<div class="muted-note">No rules yet. Add some.</div>'; return }
     rules.forEach(r=>{
@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  function save(){
-    const rules = storage.get('rules') || [];
+  async function save(){
+    const rules = await storage.get('rules') || [];
     const payload = { text: field.value.trim() };
     if(!payload.text) return closeModal();
     if(editingId){
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }else{
       rules.push({ id: storage.id(), ...payload });
     }
-    storage.set('rules', rules); closeModal(); load();
+    await storage.set('rules', rules); closeModal(); load();
   }
 
-  listEl.addEventListener('click', (e)=>{
+  listEl.addEventListener('click', async (e)=>{
     const id = e.target.dataset && e.target.dataset.id; if(!id) return;
-    const rules = storage.get('rules') || [];
+    const rules = await storage.get('rules') || [];
     if(e.target.classList.contains('edit')){ const f = rules.find(r=>r.id===id); if(f) openModal(f); }
   });
 
@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   cancelBtn.addEventListener('click', closeModal);
   saveBtn.addEventListener('click', save);
   const deleteBtn = document.getElementById('delete-r');
-  deleteBtn && deleteBtn.addEventListener('click', ()=>{
+  deleteBtn && deleteBtn.addEventListener('click', async ()=>{
     if(!editingId) return;
-    const rules = storage.get('rules') || [];
-    storage.set('rules', rules.filter(r=>r.id!==editingId));
+    const rules = await storage.get('rules') || [];
+    await storage.set('rules', rules.filter(r=>r.id!==editingId));
     editingId = null;
     closeModal(); load();
   });

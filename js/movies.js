@@ -45,9 +45,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     modalBack.querySelector('.modal').classList.remove('show');
   }
 
-  function load(){
+  async function load(){
     try{
-      const movies = storage.get('movies') || [];
+      const movies = await storage.get('movies') || [];
       movies.sort((a,b)=> (b.date||'').localeCompare(a.date||''));
       listEl.innerHTML='';
       if(movies.length===0){
@@ -99,8 +99,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 
-  function save(){
-    const movies = storage.get('movies') || [];
+  async function save(){
+    const movies = await storage.get('movies') || [];
     const payload = {
       title: fields.title.value.trim(),
       date: fields.date.value || new Date().toISOString().slice(0,10),
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }else{
       movies.push({ id: storage.id(), ...payload });
     }
-    storage.set('movies', movies);
+    await storage.set('movies', movies);
     closeModal(); load();
   }
 
@@ -128,20 +128,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
   cancelBtn.addEventListener('click', closeModal);
   saveBtn.addEventListener('click', save);
   const deleteBtn = document.getElementById('delete-m');
-  deleteBtn && deleteBtn.addEventListener('click', ()=>{
+  deleteBtn && deleteBtn.addEventListener('click', async ()=>{
     if(!editingId) return;
-    const movies = storage.get('movies') || [];
+    const movies = await storage.get('movies') || [];
     const filtered = movies.filter(m=>m.id!==editingId);
-    storage.set('movies', filtered);
+    await storage.set('movies', filtered);
     editingId = null;
     closeModal(); load();
   });
   modalBack.addEventListener('click', (e)=>{ if(e.target===modalBack) closeModal() });
-  listEl.addEventListener('click', (e)=>{
+  listEl.addEventListener('click', async (e)=>{
     const id = e.target.dataset && e.target.dataset.id;
     if(!id) return;
     if(e.target.classList.contains('edit')){
-      const movies = storage.get('movies') || [];
+      const movies = await storage.get('movies') || [];
       const found = movies.find(m=>m.id===id);
       if(found) openModal(found);
     }
