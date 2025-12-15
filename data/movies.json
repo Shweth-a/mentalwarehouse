@@ -3,7 +3,7 @@
     "id": "mitah8r0zsen",
     "title": "Twilight: New Moon",
     "date": "2025-08-21",
-    "location": "Shwetha",
+    "location": "Shwetha's House",
     "rating_shwetha": "6.0",
     "rating_sarvesh": "5.0",
     "notes": ""
@@ -11,9 +11,9 @@
   {
     "id": "mitah8r0gggm",
     "title": "The Proposal",
-    "date": "2025-xx-xx",
-    "location": "Sarvesh",
-    "rating_shwetha": "",
+    "date": "2025-09-09",
+    "location": "Sarvesh's House",
+    "rating_shwetha": "5.6",
     "rating_sarvesh": "",
     "notes": ""
   },
@@ -21,7 +21,7 @@
     "id": "mitah8r0pvuo",
     "title": "F1: The Movie",
     "date": "2025-09-08",
-    "location": "Sarvesh",
+    "location": "Sarvesh's House",
     "rating_shwetha": "9.2",
     "rating_sarvesh": "7.4",
     "notes": ""
@@ -30,7 +30,7 @@
     "id": "mitah8r0cc8m",
     "title": "How to Train Your Dragon 2",
     "date": "2025-09-09",
-    "location": "Shwetha",
+    "location": "Shwetha's House",
     "rating_shwetha": "8.1",
     "rating_sarvesh": "7",
     "notes": ""
@@ -38,8 +38,8 @@
   {
     "id": "mitah8r0ksru",
     "title": "Harry Potter and the Philosopher's Stone",
-    "date": "2025-xx-xx",
-    "location": "xxxxxxx",
+    "date": "2025-09-19",
+    "location": "Shwetha's House",
     "rating_shwetha": "9",
     "rating_sarvesh": "6.3",
     "notes": ""
@@ -51,6 +51,141 @@
     "rating_shwetha": "2.5",
     "rating_sarvesh": "7.2",
     "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6dq4rxxf5w",
+    "title": "The Devil Wears Prada",
+    "date": "2025-08-08",
+    "rating_shwetha": "8.5",
+    "rating_sarvesh": "6",
+    "location": "Sarvesh's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6dsn4peavy",
+    "title": "What's Your Number",
+    "date": "2025-10-06",
+    "rating_shwetha": "10",
+    "rating_sarvesh": "",
+    "location": "Sarvesh's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6dttp3zciz",
+    "title": "Rockstar",
+    "date": "2025-08-17",
+    "rating_shwetha": "6",
+    "rating_sarvesh": "5.8",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6du9c2k88k",
+    "title": "Om Shanti Om",
+    "date": "2025-12-10",
+    "rating_shwetha": "7",
+    "rating_sarvesh": "",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e0lidjbkj",
+    "title": "Harry Potter and the Chamber of Secrets",
+    "date": "2025-09-19",
+    "rating_shwetha": "8",
+    "rating_sarvesh": "",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e1hv6pprq",
+    "title": "Harry Potter and the Prisoner of Azkaban",
+    "date": "2025-09-22",
+    "rating_shwetha": "7.5",
+    "rating_sarvesh": "",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e3su7t9kl",
+    "title": "Harry Potter and the Goblet of Fire",
+    "date": "2025-09-25",
+    "rating_shwetha": "9",
+    "rating_sarvesh": "",
+    "location": "Shwetha House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e4gb4ldyo",
+    "title": "Harry Potter and the Order of the Phoenix",
+    "date": "2025-11-12",
+    "rating_shwetha": "7",
+    "rating_sarvesh": "",
+    "location": "Sarvesh's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e5kos39uj",
+    "title": "Harry Potter and the Half Blood Prince",
+    "date": "2025-11-26",
+    "rating_shwetha": "9.5",
+    "rating_sarvesh": "",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e6aof7r8y",
+    "title": "Harry Potter and the Deathly Hallows Part 1",
+    "date": "2025-11-28",
+    "rating_shwetha": "7",
+    "rating_sarvesh": "",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e6s9aphp9",
+    "title": "Harry Potter and the Deathly Hallows Part 2",
+    "date": "2025-11-30",
+    "rating_shwetha": "7",
+    "rating_sarvesh": "",
+    "location": "Shwetha's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e8au48upl",
+    "title": "Elemental",
+    "date": "2025-12-08",
+    "rating_shwetha": "9.8",
+    "rating_sarvesh": "",
+    "location": "Sarvesh's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e9w1d56fb",
+    "title": "10 Things I Hate About You",
+    "date": "2025-12-03",
+    "rating_shwetha": "10",
+    "rating_sarvesh": "",
+    "location": "Sarvesh's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6eblbgd293",
+    "title": "Hoodwinked",
+    "date": "2025-11-13",
+    "rating_shwetha": "8",
+    "rating_sarvesh": "",
+    "location": "Sarvesh's house",
+    "notes": ""
+  },
+  {
+    "id": "mj6ed9t876t1",
+    "title": "Confessions of a Shopaholic",
+    "date": "2025-11-21",
+    "rating_shwetha": "6.5",
+    "rating_sarvesh": "",
+    "location": "Sarvesh's House",
     "notes": ""
   }
 ]
