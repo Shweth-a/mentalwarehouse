@@ -14,7 +14,7 @@
     "date": "2025-09-09",
     "location": "Sarvesh's House",
     "rating_shwetha": "5.6",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.0",
     "notes": ""
   },
   {
@@ -67,7 +67,7 @@
     "title": "What's Your Number",
     "date": "2025-10-06",
     "rating_shwetha": "10",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.8",
     "location": "Sarvesh's House",
     "notes": ""
   },
@@ -85,7 +85,7 @@
     "title": "Om Shanti Om",
     "date": "2025-12-10",
     "rating_shwetha": "7",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.4",
     "location": "Shwetha's House",
     "notes": ""
   },
@@ -94,7 +94,7 @@
     "title": "Harry Potter and the Chamber of Secrets",
     "date": "2025-09-19",
     "rating_shwetha": "8",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.8",
     "location": "Shwetha's House",
     "notes": ""
   },
@@ -103,7 +103,7 @@
     "title": "Harry Potter and the Prisoner of Azkaban",
     "date": "2025-09-22",
     "rating_shwetha": "7.5",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "7.2",
     "location": "Shwetha's House",
     "notes": ""
   },
@@ -112,7 +112,7 @@
     "title": "Harry Potter and the Goblet of Fire",
     "date": "2025-09-25",
     "rating_shwetha": "9",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "7.0",
     "location": "Shwetha House",
     "notes": ""
   },
@@ -121,7 +121,7 @@
     "title": "Harry Potter and the Order of the Phoenix",
     "date": "2025-11-12",
     "rating_shwetha": "7",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "7.0",
     "location": "Sarvesh's House",
     "notes": ""
   },
@@ -130,7 +130,7 @@
     "title": "Harry Potter and the Half Blood Prince",
     "date": "2025-11-26",
     "rating_shwetha": "9.5",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "7.1",
     "location": "Shwetha's House",
     "notes": ""
   },
@@ -139,7 +139,7 @@
     "title": "Harry Potter and the Deathly Hallows Part 1",
     "date": "2025-11-28",
     "rating_shwetha": "7",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.7",
     "location": "Shwetha's House",
     "notes": ""
   },
@@ -148,7 +148,7 @@
     "title": "Harry Potter and the Deathly Hallows Part 2",
     "date": "2025-11-30",
     "rating_shwetha": "7",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.9",
     "location": "Shwetha's House",
     "notes": ""
   },
@@ -157,7 +157,7 @@
     "title": "Elemental",
     "date": "2025-12-08",
     "rating_shwetha": "9.8",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.8",
     "location": "Sarvesh's House",
     "notes": ""
   },
@@ -166,7 +166,7 @@
     "title": "10 Things I Hate About You",
     "date": "2025-12-03",
     "rating_shwetha": "10",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "6.0",
     "location": "Sarvesh's House",
     "notes": ""
   },
@@ -175,7 +175,7 @@
     "title": "Hoodwinked",
     "date": "2025-11-13",
     "rating_shwetha": "8",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "8.0",
     "location": "Sarvesh's house",
     "notes": ""
   },
@@ -184,8 +184,17 @@
     "title": "Confessions of a Shopaholic",
     "date": "2025-11-21",
     "rating_shwetha": "6.5",
-    "rating_sarvesh": "",
+    "rating_sarvesh": "5.9",
     "location": "Sarvesh's House",
+    "notes": ""
+  },
+  {
+    "id": "mj6e7zk9p0qr",
+    "title": "Bhool Bhulaiyaa",
+    "date": "2025-11-22",
+    "rating_shwetha": "",
+    "rating_sarvesh": "6.5",
+    "location": "Kirtana's House",
     "notes": ""
   }
 ]
